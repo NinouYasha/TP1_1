@@ -1,4 +1,4 @@
-package com.example.tp1_1.View;
+package com.example.tp1_1.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,11 +19,11 @@ public class BallView extends View {
     private Paint picturePainter = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     // Bitmap that will be drawn
-    private Bitmap bitmap;
+    private Bitmap ballPicture;
 
-    // Picture postion from left and top of the screen
-    private int int_postionTop;
-    private int int_positionLeft;
+    // Picture postion from left and top of the view component
+    private int posTopDpx;
+    private int posLeftDpx;
 
     // Component view constructor
     public BallView(Context context, @Nullable AttributeSet attrs) {
@@ -37,19 +37,19 @@ public class BallView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
         // Loading picture into bitmap
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bille);
+        ballPicture = BitmapFactory.decodeResource(getResources(), R.drawable.bille);
 
-        // Getting left and top position for a picture at the center of the view
-        int_positionLeft = (w-bitmap.getWidth())/2;
-        int_postionTop = (h-bitmap.getHeight())/2;
+        // Getting left and top position for a picture at the center of the view component
+        posLeftDpx = (w- ballPicture.getWidth())/2;
+        posTopDpx = (h- ballPicture.getHeight())/2;
     }
 
-    // onDraw is called by the system each time the view is displayed or updated
+    // onDraw is called by the system each time the view component is displayed or updated
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // Drawing the picture in the middle of the view
-        canvas.drawBitmap(bitmap,int_positionLeft,int_postionTop,picturePainter);
+        // Drawing the picture in the middle of the view component
+        canvas.drawBitmap(ballPicture, posLeftDpx, posTopDpx, picturePainter);
     }
 }
