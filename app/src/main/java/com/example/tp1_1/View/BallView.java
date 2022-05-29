@@ -7,12 +7,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.annotation.Nullable;
-
 import com.example.tp1_1.R;
 
-// This class is a view component loaded in MainActivity
+// This class is a view component
 public class BallView extends View {
 
     // Pencil that will allow the picture to be drawn
@@ -25,14 +23,19 @@ public class BallView extends View {
     private int posTopDpx;
     private int posLeftDpx;
 
-    // Component view constructor
+    // Component view constructor with the physical layout
     public BallView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
+    // Component view constructor without the physical layout
+    public BallView(Context context) {
+        super(context);
+    }
+
     // onSizeChanged is called each time the size view changes, here only once because the activity
-    // in which the view is displayed (MainActivity) has been stacked in protrait mode (see manifest
-    // file). onSizeChanged is called before onDraw.
+    // in which the view is displayed has been stacked in protrait mode (see manifest file).
+    // onSizeChanged is called before onDraw.
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
@@ -40,8 +43,8 @@ public class BallView extends View {
         ballPicture = BitmapFactory.decodeResource(getResources(), R.drawable.bille);
 
         // Getting left and top position for a picture at the center of the view component
-        posLeftDpx = (w- ballPicture.getWidth())/2;
-        posTopDpx = (h- ballPicture.getHeight())/2;
+        posLeftDpx = (w - ballPicture.getWidth())/2;
+        posTopDpx = (h - ballPicture.getHeight())/2;
     }
 
     // onDraw is called by the system each time the view component is displayed or updated
@@ -51,5 +54,13 @@ public class BallView extends View {
 
         // Drawing the picture in the middle of the view component
         canvas.drawBitmap(ballPicture, posLeftDpx, posTopDpx, picturePainter);
+    }
+
+    // Attributes setters
+    public void setPosTopDpx(int posTopDpx) {
+        this.posTopDpx = posTopDpx - ballPicture.getHeight()/2;
+    }
+    public void setPosLeftDpx(int posLeftDpx) {
+        this.posLeftDpx = posLeftDpx - ballPicture.getWidth()/2;
     }
 }
